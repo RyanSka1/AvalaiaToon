@@ -44,19 +44,23 @@ input[type="submit"]:hover {
 }
 
 button {
-    margin-top: 10px;
-    background-color: white;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    background-color: red;
     color: black;
-    padding: 10px 20px;
-    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 4px;
 }
 
 button:hover {
-    background-color: #eeeeee;
+    background-color: #ff4d4d;
 }
 
 form {
     display: flex;
     flex-direction: column;
     width: 300px;
+    
 }
