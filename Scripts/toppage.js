@@ -5,6 +5,6 @@ document.getElementById('logout').addEventListener('click', function() {
 });
 
 document.getElementById('home').addEventListener('click', function() {
-    // Adicione aqui a lógica de retorno para a página principal
-    console.log('Você clicou no botão de página principal');
+    // Redireciona para a página principal
+    window.location.href = 'pgprincipal.html';
 });
