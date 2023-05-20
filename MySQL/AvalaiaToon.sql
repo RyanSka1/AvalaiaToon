@@ -9,4 +9,6 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL,
     cpf CHAR(14) NOT NULL,
     phone CHAR(15) NOT NULL
+    ALTER TABLE users ADD COLUMN verified BOOLEAN DEFAULT 0;
+
 );
