@@ -19,11 +19,11 @@
 	$mail->Port = 465;
 
     // Detalhes do envio de E-mail
-	$mail->Username = '<username>'; 
-	$mail->Password = "<password>";
-	$mail->SetFrom('<email>', '<name>');
-    $mail->addAddress('<email>','');
-	$mail->Subject = "<subject>";
+	$mail->Username = 'avalaiatoon'; 
+	$mail->Password = "gjxisuecynbuzeaa";
+	$mail->SetFrom('avalaiatoon@gmail.com', 'Avalaia');
+    $mail->addAddress('avalaiatoon@gmail.com','');
+	$mail->Subject = "Validar Email AvalaiaToon";
 
 
     // Mensagem
