@@ -1,4 +1,4 @@
-CREATE DATABASE AvalaiaToon;
+CREATE DATABASE if not exists AvalaiaToon;
 
 USE AvalaiaToon;
 
@@ -8,9 +8,8 @@ SET GLOBAL event_scheduler = ON;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL, -- Armazene as senhas como hashes
+    password VARCHAR(255) NOT NULL, -- Store passwords as hashes
     email VARCHAR(100) NOT NULL,
-    ALTER TABLE users ADD COLUMN verified BOOLEAN DEFAULT 0;
     verified BOOLEAN DEFAULT 0
 );
 
