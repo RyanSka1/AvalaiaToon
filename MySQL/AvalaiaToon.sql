@@ -41,3 +41,7 @@ CREATE EVENT IF NOT EXISTS delete_expired_tokens
 ON SCHEDULE EVERY 1 MINUTE
 DO
     DELETE FROM password_resets WHERE created_at < DATE_SUB(NOW(), INTERVAL 15 MINUTE);
+
+
+ALTER TABLE users
+ADD two_factor_secret VARCHAR(16);
