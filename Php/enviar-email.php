@@ -11,27 +11,28 @@
     // Configuração
     $mail->Mailer = "smtp";
     $mail->IsSMTP(); 
-	$mail->CharSet = 'UTF-8';   
-	$mail->SMTPDebug = 0;
-	$mail->SMTPAuth = true;     
-	$mail->SMTPSecure = 'ssl'; 
+    $mail->CharSet = 'UTF-8';   
+    $mail->SMTPDebug = 0;
+    $mail->SMTPAuth = true;     
+    $mail->SMTPSecure = 'ssl'; 
     $mail->Host = 'smtp.gmail.com'; 
-	$mail->Port = 465;
+    $mail->Port = 465;
 
     // Detalhes do envio de E-mail
-	$mail->Username = 'avalaiatoon'; 
-	$mail->Password = "gjxisuecynbuzeaa";
-	$mail->SetFrom('avalaiatoon@gmail.com', 'Avalaia');
-    $mail->addAddress('avalaiatoon@gmail.com','');
-	$mail->Subject = "Validar Email AvalaiaToon";
+    $mail->Username = 'avalaiatoon@gmail.com'; 
+    $mail->Password = "gjxisuecynbuzeaa";
+    $mail->SetFrom('avalaiatoon@gmail.com', 'Avalaia');
 
+    // Substitua 'user@example.com' pelo e-mail do usuário.
+    $userEmail = 'user@example.com';
+    $mail->addAddress($userEmail);
+
+    $mail->Subject = "Validar Email AvalaiaToon";
 
     // Mensagem
     $mensagem = "<h1> Token </h1>";
     $mensagem .= "<h3> 123456 </h3>";
 
-
     $mail->msgHTML($mensagem);
     $mail->send();
-
 ?>

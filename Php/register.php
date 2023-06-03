@@ -4,10 +4,8 @@ include 'db_conn.php';
 $username = $_POST['username'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $email = $_POST['email'];
-$cpf = $_POST['cpf'];
-$phone = $_POST['phone'];
 
-$sql = "INSERT INTO users (username, password, email, verified, ) VALUES (?, ?, ?, 0)";
+$sql = "INSERT INTO users (username, password, email, cpf, phone, verified) VALUES (?, ?, ?, ?, ?, 0)";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sssss", $username, $password, $email, $cpf, $phone);

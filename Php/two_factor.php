@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include 'session_manager.php';
     require_once 'db_config.php';
     require_once 'vendor/autoload.php';
     

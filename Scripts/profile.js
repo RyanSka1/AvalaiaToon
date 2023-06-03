@@ -1,6 +1,14 @@
-document.getElementById('username').textContent = localStorage.getItem('username');
+document.getElementById('username').textContent = sessionStorage.getItem('username');
 
 function logout() {
-    localStorage.removeItem('username');
+    // Fazendo uma solicitação GET para o script de logout do lado do servidor
+    fetch('logout.php')
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    sessionStorage.removeItem('username');
     window.location = 'login.html';
 }

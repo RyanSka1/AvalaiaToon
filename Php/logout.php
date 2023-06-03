@@ -1,5 +1,6 @@
 <?php
 
+include 'session_manager.php';
 include 'db_conn.php';
 
 // logout.php
