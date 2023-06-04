@@ -1,4 +1,5 @@
 <?php
+    session_start(); // Inicia a sessão
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
@@ -24,7 +25,7 @@
     $mail->SetFrom('avalaiatoon@gmail.com', 'Avalaia');
 
     // Substitua 'user@example.com' pelo e-mail do usuário.
-    $userEmail = 'user@example.com';
+    $userEmail = $_SESSION['user_email']; // Usa o e-mail armazenado na sessão
     $mail->addAddress($userEmail);
 
     $mail->Subject = "Validar Email AvalaiaToon";
