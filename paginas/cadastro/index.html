@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" src="../../js/bibliotecas/jquery-3.3.1.js"></script>
+    <script src='../../js/bibliotecas/sjcl.js'></script>
+    <script src="../../js/cadastro/index.js"></script>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="../../css/logar.css" rel="stylesheet">
+
+	</head>
+
+  <body class="text-center">
+    <main class="form-signin">
+      <form id="form-cadastro">
+        <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
+        <br>
+    
+        <div class="form-floating">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="nome" placeholder="Johnny">
+        </div>
+
+        <div class="form-floating">
+          <label for="usuario">Usuário</label>
+          <input type="text" class="form-control" name="usuario" id="usuario" placeholder="John" maxlength="20" required>
+        </div>
+        <div class="form-floating">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" name="email" id="email" placeholder="user@gmail.com" required>
+        </div>
+        <div class="form-floating">
+          <label for="cpf">CPF</label>
+          <input type="text" class="form-control" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+        </div>
+        <div class="form-floating">
+          <label for="senha">Senha</label>
+          <input type="password" class="form-control" id="senha" placeholder="Senha" maxlength="30" required>
+          <input type="hidden" name="senha_hash" id="senha_hash" />
+        </div>
+        <button class="btn btn-primary btn-block py-2 mt-0" id="bCadastrar">Salvar</button>
+        <br>
+        <a href="https://gabrielproject/Project/Paginas/index.html" class="btn btn-primary">Voltar</a>
+      </form>
+    </main>
+</html>

@@ -1,32 +1,55 @@
 <?php
-    include 'db_conn.php';
-    session_start(); // Inicia a sessão
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+ session_start();
+ 
+ require "config.php";
 
-    $sql = "SELECT id, username, password FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
+ 
+	$usuario = $_POST["usuario"] ?? "";
+	$senha = $_POST["senha_hash"] ?? "";
 
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) {
-            // Armazena os dados do usuário na sessão
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['authenticated'] = true;
-            $_SESSION['last_activity'] = time();
-            header('Location: two_factor.html');
-            exit();
-        } else {
-            echo "Senha incorreta!";
-        }
-    } else {
-        echo "Usuário não encontrado!";
-    }
+	$query = "SELECT * FROM usuario WHERE usuario = '$usuario' AND senha = '$senha'";
 
-    $conn->close();
+	$resultado = mysqli_query($conexao, $query);
+
+	$retorno["status"] = "n";
+	$retorno["mensagem"] = "usuario não cadastrado";
+	$retorno["funcao"] = "login";
+	
+	//Se tiver registro
+	if(mysqli_num_rows($resultado) > 0) 
+	{
+		$registro = mysqli_fetch_assoc($resultado);
+
+		$_SESSION["usuario"] = $registro["usuario"];
+		$_SESSION["inicio"] = time();
+
+		//Autenticação por 60 minutos
+		$_SESSION["tempolimite"] = 600; // 10 minutos
+		$_SESSION["id"] = session_id();
+
+		$retorno["status"] = "s";
+		$retorno["mensagem"] = $_POST['usuario'].", confirme o seu código!";
+	}
+	// print_r($_SESSION);
+
+	// echo json_encode($retorno);
+	
+	if($resultado == false) {
+		die($mysqli -> error);
+	}
+
+		$expirar = 60;
+
+
+	//Sessão por 1 hora
+	if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > ($expirar * 60))) {
+
+		session_unset(); 
+		session_destroy();
+	}
+
+	//print_r($_SESSION);
+	echo json_encode($retorno);
+
 ?>
