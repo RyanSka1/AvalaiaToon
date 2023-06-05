@@ -4,7 +4,7 @@
 	define("PORTA", "3307");
 	define("BANCO", "experiencia");
 	define("USUARIO_MYSQL", "root");
-	define("SENHA_MYSQL", "");
+	define("SENHA_MYSQL", "root");
 
 	$conexao = mysqli_connect(ENDERECO.":".PORTA, USUARIO_MYSQL, SENHA_MYSQL, BANCO);
 
