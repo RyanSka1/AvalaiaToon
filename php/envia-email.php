@@ -50,4 +50,4 @@ try {
 }
 ?>
 
-<button onclick="window.location.href='../paginas/index.html'" class="btn btn-primary btn-block py-2 mt-0">Voltar</button>
+<button onclick="window.location.href='/../paginas/index.html'" class="btn btn-primary btn-block py-2 mt-0">Voltar</button>

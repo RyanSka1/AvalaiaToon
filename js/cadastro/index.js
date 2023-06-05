@@ -32,7 +32,7 @@ function fLocalComunicaServidor(formulario, arquivo){
 	$.ajax({
 		type:"POST",
 		dataType: "json",
-		url: "../php/"+arquivo+".php",
+		url: "/../php/"+arquivo+".php",
 		data: dados,
 	 	// beforeSend : function(){
 		// 	$("#bAcessar").html('Aguarde');
@@ -43,7 +43,7 @@ function fLocalComunicaServidor(formulario, arquivo){
 				if(retorno.status == "s")
 				{
 					alert("Usuário cadastrado!");
-					window.location.href = "../php/envia-email.php";
+					window.location.href = "/../php/envia-email.php";
 				} 
 				else 
 				{
