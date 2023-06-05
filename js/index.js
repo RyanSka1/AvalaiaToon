@@ -46,12 +46,12 @@ function credencial(){
 	$.ajax({
 		type:"POST",
 		dataType: "json",
-		url: "/Project/php/confidencial.php",
+		url: "/../../php/confidencial.php",
 		data: "",
 		success: function(retorno){
 			if(retorno.credencial == "sim"){
 
-				window.location.href = "https://gabrielproject/Project/Paginas/logado/confidencial.html";
+				window.location.href = "../../Paginas/logado/confidencial.html";
 
 			} else {
 				alert("Cadastre-se primeiro");
