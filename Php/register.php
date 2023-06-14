@@ -21,8 +21,8 @@ if ($stmt->execute()) {
     $headers = "From: no-reply@yourwebsite.com";
 
     // Usando PHPMailer
-    use \PHPMailer\src\PHPMailer;
-    use \PHPMailer\src\Exception;
+    use PHPMailer\src\PHPMailer;
+    use PHPMailer\src\Exception;
     require 'PHPMailer-master/src/Exception.php'; 
     require 'PHPMailer-master/src/PHPMailer.php';
     require 'PHPMailer-master/src/SMTP.php';

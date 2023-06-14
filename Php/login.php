@@ -19,7 +19,7 @@
             $_SESSION['username'] = $row['username'];
             $_SESSION['authenticated'] = true;
             $_SESSION['last_activity'] = time();
-            header('Location: two_factor.html');
+            header('Location: ./two_factor.html');
             exit();
         } else {
             echo "Senha incorreta!";

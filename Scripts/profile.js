@@ -2,7 +2,7 @@ document.getElementById('username').textContent = sessionStorage.getItem('userna
 
 function logout() {
     // Fazendo uma solicitação GET para o script de logout do lado do servidor
-    fetch('logout.php')
+    fetch('./php/logout.php')
         .then(response => response.text())
         .then(data => console.log(data))
         .catch((error) => {
@@ -10,5 +10,5 @@ function logout() {
         });
 
     sessionStorage.removeItem('username');
-    window.location = 'login.html';
+    window.location = './login.html';
 }
