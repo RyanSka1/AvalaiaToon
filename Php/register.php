@@ -8,6 +8,10 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 include 'db_conn.php';
+if ($conn && $conn->connect_error) {
+    die("Erro de conexão: " . $conn->connect_error);
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
