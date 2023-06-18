@@ -1,61 +1,49 @@
 <?php
+require 'vendor/autoload.php';
+$mail = new PHPMailer\PHPMailer\PHPMailer();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php'; 
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 include 'db_conn.php';
 
-$username = $_POST['username'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-$email = $_POST['email'];
-$cpf = $_POST['cpf'];
-$phone = $_POST['phone'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $email = $_POST['email'];
 
-$sql = "INSERT INTO users (username, password, email, cpf, phone, verified) VALUES (?, ?, ?, ?, ?, 0)";
+    $verification_code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sssss", $username, $password, $email, $cpf, $phone);
+    $sql = "INSERT INTO users (username, password, email, verification_code) VALUES (?, ?, ?, ?)";
 
-if ($stmt->execute()) {
-    $userId = $conn->insert_id;
-    $hash = password_hash($userId, PASSWORD_DEFAULT);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $username, $password, $email, $verification_code);
 
-    $subject = "Confirmação de cadastro em AvalaiaToon";
-    $message = "Clique no link a seguir para confirmar seu cadastro: http://yourwebsite.com/confirm.php?user=$userId&hash=$hash";
-    $headers = "From: no-reply@yourwebsite.com";
+    if ($stmt->execute()) {
+        $mail = new PHPMailer();
+        $mail->IsSMTP(); 
+        $mail->Host = 'smtp.gmail.com'; 
+        $mail->SMTPAuth = true;     
+        $mail->Username = 'avalaiatoon@gmail.com'; 
+        $mail->Password = 'papisantin1!'; 
+        $mail->SMTPSecure = 'tls'; 
+        $mail->Port = 587;
+        $mail->SetFrom('avalaiatoon@gmail.com', 'AvalaiaToon');
+        $mail->addAddress($email);
+        $mail->Subject = "Confirmação de cadastro";
+        $mail->Body = "Seu código de verificação é: $verification_code";
 
-    // Usando PHPMailer
-    use PHPMailer\src\PHPMailer;
-    use PHPMailer\src\Exception;
-    require 'PHPMailer-master/src/Exception.php'; 
-    require 'PHPMailer-master/src/PHPMailer.php';
-    require 'PHPMailer-master/src/SMTP.php';
-
-    $mail = new PHPMailer();
-
-    // Configuração
-    $mail->Mailer = "smtp";
-    $mail->IsSMTP(); 
-    $mail->CharSet = 'UTF-8';   
-    $mail->SMTPDebug = 0;
-    $mail->SMTPAuth = true;     
-    $mail->SMTPSecure = 'ssl'; 
-    $mail->Host = 'smtp.gmail.com'; 
-    $mail->Port = 465;
-
-    // Detalhes do envio de E-mail
-    $mail->Username = 'avalaiatoon@gmail.com'; 
-    $mail->Password = "gjxisuecynbuzeaa";
-    $mail->SetFrom('avalaiatoon@gmail.com', 'Avalaia');
-    $mail->addAddress($email);
-    $mail->Subject = $subject;
-    $mail->msgHTML($message);
-
-    if($mail->send()){
-        echo "Usuário registrado com sucesso! Por favor, verifique seu e-mail para confirmar seu cadastro.";
+        if($mail->send()){
+            echo "Usuário registrado com sucesso! Por favor, verifique seu e-mail para confirmar seu cadastro.";
+        } else {
+            echo "Erro ao enviar o e-mail.";
+        }
     } else {
-        echo "Erro ao enviar o e-mail.";
+        echo "Erro: " . $sql . "<br>" . $conn->error;
     }
-} else {
-    echo "Erro: " . $sql . "<br>" . $conn->error;
+
+    $conn->close();
 }
-
-$conn->close();
-
 ?>
